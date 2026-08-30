@@ -39,7 +39,6 @@
         flex-direction: column;
         padding: component.var(padding);
         font-size: component.var(font-size);
-        overflow-y: auto;
     }
 
     .header + .content {
@@ -49,7 +48,6 @@
     .close-button {
         flex-shrink: 0;
     }
-
 
     @include component.sizes(Drawer.$sizes);
 

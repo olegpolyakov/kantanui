@@ -30,6 +30,7 @@ export * from './Portal';
 export * from './Provider';
 export * from './Progress';
 export * from './Radio';
+export * from './Scrollable';
 export * from './Select';
 export * from './Slider';
 export * from './Sortable';

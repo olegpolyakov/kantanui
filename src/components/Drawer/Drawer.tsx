@@ -3,9 +3,11 @@ import { ReactNode, useCallback, useRef, type MouseEventHandler } from 'react';
 import { cn as ccn } from '../../component';
 import type { BaseColor, ComponentProps, ElementType, Shadow, Shape, Size, SizeExtended, Slotted } from '../../types';
 
+import { isObject } from '../../utils';
 import Button, { ButtonProps } from '../Button';
 import Heading, { HeadingProps } from '../Heading';
 import Modal from '../Modal';
+import Scrollable, { ScrollableProps } from '../Scrollable';
 import Slot from '../Slot';
 import Transition from '../Transition';
 
@@ -25,6 +27,7 @@ export type DrawerProps = {
     shadow?: Shadow;
     backdrop?: boolean;
     inset?: boolean;
+    scrollable?: boolean | ScrollableProps;
     closeOnClickOutside?: boolean;
     onClose?: () => void;
 };
@@ -55,6 +58,7 @@ export default function Drawer<T extends ElementType = 'div'>({
     shape,
     backdrop = true,
     inset = false,
+    scrollable = true,
     closeOnClickOutside = false,
     onClose,
     ...props
@@ -141,7 +145,13 @@ export default function Drawer<T extends ElementType = 'div'>({
                     }
 
                     <div className={styles.content}>
-                        {content}
+                        {isObject(scrollable) ?
+                            <Scrollable {...scrollable}>
+                                {content}
+                            </Scrollable> :
+                            content
+                        }
+                    </div>
                     </div>
                 </div>
             </Transition>
