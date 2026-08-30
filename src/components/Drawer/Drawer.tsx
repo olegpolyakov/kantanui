@@ -18,6 +18,7 @@ export type DrawerProps = {
     title?: Slotted<HeadingProps>;
     header?: ReactNode;
     content?: ReactNode;
+    footer?: ReactNode;
     closeButton?: Slotted<ButtonProps>;
     type?: 'inline' | 'overlay' | 'modal';
     position?: 'left' | 'right' | 'top' | 'bottom';
@@ -46,9 +47,10 @@ export default function Drawer<T extends ElementType = 'div'>({
     children,
 
     open,
-    content = children,
-    header,
     title,
+    header,
+    content = children,
+    footer,
     closeButton = { icon: 'close' },
     type = 'inline',
     position = 'left',
@@ -152,6 +154,9 @@ export default function Drawer<T extends ElementType = 'div'>({
                             content
                         }
                     </div>
+
+                    <div className={styles.footer}>
+                        {footer}
                     </div>
                 </div>
             </Transition>
