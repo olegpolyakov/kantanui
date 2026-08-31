@@ -39,6 +39,7 @@
         flex-direction: column;
         padding: component.var(padding);
         font-size: component.var(font-size);
+        overflow: hidden;
     }
 
     .header + .content {
