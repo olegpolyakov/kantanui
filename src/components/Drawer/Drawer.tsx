@@ -3,7 +3,7 @@ import { ReactNode, useCallback, useRef, type MouseEventHandler } from 'react';
 import { cn as ccn } from '../../component';
 import type { BaseColor, ComponentProps, ElementType, Shadow, Shape, Size, SizeExtended, Slotted } from '../../types';
 
-import { isObject } from '../../utils';
+import { isBoolean, isObject } from '../../utils';
 import Button, { ButtonProps } from '../Button';
 import Heading, { HeadingProps } from '../Heading';
 import Modal from '../Modal';
@@ -146,18 +146,24 @@ export default function Drawer<T extends ElementType = 'div'>({
                         </div>
                     }
 
-                    <div className={styles.content}>
-                        {isObject(scrollable) ?
-                            <Scrollable {...scrollable}>
+                    {isBoolean(scrollable) ?
+                        <Scrollable className={styles.content}>
+                            {content}
+                        </Scrollable> :
+                        isObject(scrollable) ?
+                            <Scrollable className={styles.content} {...scrollable}>
                                 {content}
                             </Scrollable> :
-                            content
-                        }
-                    </div>
+                            <div className={styles.content}>
+                                {content}
+                            </div>
+                    }
 
-                    <div className={styles.footer}>
-                        {footer}
-                    </div>
+                    {footer &&
+                        <div className={styles.footer}>
+                            {footer}
+                        </div>
+                    }
                 </div>
             </Transition>
         </Component>
